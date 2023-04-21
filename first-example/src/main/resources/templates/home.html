@@ -10,5 +10,27 @@
 <body>
     <h1>Hello Spring Boot</h1>
     <div><img alt="Spring Boot Logo" src="img/spring-boot-logo.png" class="sb-logo"></div>
+    <div>
+        <h2>Try also our simple API</h2>        
+        <div>
+            <h3>Get all people</h3>
+            (GET request to <a href="/api/v1/people" target="_blank">/api/v1/people</a>)
+            <button id="getAllPeopleButton">Try it here!</button>
+            <button id="clearAllPeopleResultButton">Clear</button>
+            <div>
+                <pre><code id="allPeopleResult"></code></pre>
+            </div>
+        </div>
+        <div>
+            <h3>Get a single person</h3>
+            (GET request to <a id="getPersonByIdLink" href="/api/v1/people/2" target="_blank">/api/v1/people/</a><input id="personIdField" type="number" size="2" value="2"/>)
+            <button id="getPersonByIdButton">Try it here!</button>
+            <button id="clearPersonByIdResultButton">Clear</button>
+            <div>
+                <pre><code id="personByIdResult"></code></pre>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/call-services.js"></script>
 </body>
 </html>

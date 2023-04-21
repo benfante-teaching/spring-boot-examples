@@ -6,3 +6,7 @@ h1 {
     display: block;
     margin: 2em auto;
 }
+
+#personIdField {
+    width: 3em;
+}
