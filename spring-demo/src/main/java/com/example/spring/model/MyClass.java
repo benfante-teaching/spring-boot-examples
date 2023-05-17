@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyClass {
     @Autowired
-    private List l;
+    private List<String> l;
 
     public String toString() {
         return "Has a %s list".formatted(l.getClass());

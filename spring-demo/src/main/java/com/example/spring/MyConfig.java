@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan(basePackageClasses = AppJavaConfiguration.class)
 public class MyConfig {
   @Bean
-  public List myList() {
-    return new ArrayList();
+  public List<String> myList() {
+    return new ArrayList<>();
   }
 }
