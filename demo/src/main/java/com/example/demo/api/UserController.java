@@ -2,6 +2,8 @@ package com.example.demo.api;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,13 +22,14 @@ import com.example.demo.services.UserService;
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
+    private Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
 
     @GetMapping
-    public Iterable<User> getAllUsers() {
-        return userService.findAll();
+    public Iterable<User> getAllUsers(@RequestParam(required = false) String filter) {
+        return userService.findAll(filter);
     }
     
     // @GetMapping("/{id}")

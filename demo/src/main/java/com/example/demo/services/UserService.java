@@ -4,31 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.User;
+import com.example.demo.repositories.UserRepository;
 
 @Service
 public class UserService {
 
-    private List<User> archive = List.of(
-        new User(1L, "lucio.benfante", "Lucio", "Benfante", 50),
-        new User(2L, "mario.rossi", "Mario", "Rossi", 25),
-        new User(3L, "giovanna.bianchi", "Giovanna", "Bianchi", 30)
-    );
+    @Autowired
+    private UserRepository userRepository;
 
-    public Iterable<User> findAll() {
-        return archive;
+    public Iterable<User> findAll(String filterByFirstName) {
+        if (filterByFirstName == null) {
+            return userRepository.findAll();
+        } else {
+            return userRepository.findByFirstNameContaining(filterByFirstName);
+        }
     }
 
     public Optional<User> findById(Long id) {
-        return archive.stream().filter(user -> user.getId().equals(id)).findFirst();
+        return userRepository.findById(id);
     }
 
     public User add(User user) {
-        archive = new ArrayList<User>(archive);
-        archive.add(user);
-        return user;
+        return userRepository.save(user);
     }
-    
+        
 }
