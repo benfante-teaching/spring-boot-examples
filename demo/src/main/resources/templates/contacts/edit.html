@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit contact</title>
+</head>
+<body>
+    <p>Utente: <span th:text="${user}">dfsdfsd</span></p>
+
+    <h1>Edit contact</h1>
+    <form action="#" th:action="@{/contacts}" th:object="${contact}" method="post">
+        <table border="1">
+            <tr>
+                <td><label th:text="'Id'" /></td>
+                <td><input type="number" th:field="*{id}" /></td>
+            </tr>
+            <tr>
+                <td><label th:text="'Nome'" /></td>
+                <td><input type="text" th:field="*{firstName}" /></td>
+            </tr>
+            <tr>
+                <td><label th:text="'Cognome'" /></td>
+                <td><input type="text" th:field="*{lastName}" /></td>
+            </tr>
+            <tr>
+                <td><label th:text="'Telefono'" /></td>
+                <td><input type="text" th:field="*{phone}" /></td>
+            </tr>
+            <tr>
+                <td><label th:text="'Età'" /></td>
+                <td><input type="text" th:field="*{age}" /></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit" /></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

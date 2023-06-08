@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contantti</title>
+</head>
+<body>
+    <p>Utente: <span th:text="${user}">dfsdfsd</span></p>
+
+    <h1>Contatti</h1>
+
+    <ol th:if="${contacts.size() > 0}">
+        <li th:each="contact: ${contacts}">
+            <span th:text="${contact.firstName}">Lucio</span>
+            <span th:text="${contact.lastName}">Benfante</span>:
+            <span th:text="${contact.phone}">111-222-3334</span>
+            <a th:href="@{/contacts/edit/} + ${contact.id}">Edit</a>
+        </li>
+    </ol>
+    <p th:unless="${contacts.size() > 0}">Nessun contatto</p>
+</body>
+</html>
