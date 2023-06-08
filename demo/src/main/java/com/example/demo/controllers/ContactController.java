@@ -31,7 +31,7 @@ public class ContactController {
     
     @GetMapping
     public String list(Model model) {
-        List<Contact> contacts = contactService.getAllContacts();
+        Iterable<Contact> contacts = contactService.getAllContacts("", "");
         model.addAttribute("contacts", contacts);
         return "contacts/list";
     }

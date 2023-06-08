@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,8 +29,8 @@ public class ContactRestController {
     private ContactService contactService;
     
     @GetMapping
-    public List<Contact> getAllContacts() {
-        return contactService.getAllContacts();
+    public Iterable<Contact> getAllContacts(@RequestParam(defaultValue = "") String firstName, @RequestParam(defaultValue = "") String lastName) {
+        return contactService.getAllContacts(firstName, lastName);
     }
 
     @GetMapping("/{id}")
@@ -59,17 +60,8 @@ public class ContactRestController {
     
     @PatchMapping("/{id}")
     public Contact updateContact(@PathVariable Long id, @RequestBody Contact contact) {
-        Contact dbContact = contactService.findById(id).get();
-        if (contact.getFirstName() != null) {
-            dbContact.setFirstName(contact.getFirstName());
-        }
-        if (contact.getLastName() != null) {
-            dbContact.setLastName(contact.getLastName());
-        }
-        if (contact.getPhone() != null) {
-            dbContact.setPhone(contact.getPhone());
-        }
-        return contactService.save(dbContact);
+        contact.setId(id);
+        return contactService.save(contact);
     }
 
     @DeleteMapping("/{id}")
