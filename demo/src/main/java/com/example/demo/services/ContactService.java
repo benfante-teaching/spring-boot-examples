@@ -24,8 +24,13 @@ public class ContactService {
         return archive.stream().filter(contact -> contact.getId().equals(id)).findFirst();
     }
 
-    public void save(Contact contact) {
+    public Contact save(Contact contact) {
         this.archive = new ArrayList<>(archive.stream().filter(item -> !item.getId().equals(contact.getId())).toList());
         this.archive.add(contact);
+        return contact;
+    }
+
+    public void deleteContact(Long id) {
+        this.archive = new ArrayList<>(archive.stream().filter(item -> !item.getId().equals(id)).toList());
     }
 }

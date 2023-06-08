@@ -1,10 +1,13 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Contact {
     private Long id;
     private String firstName;
     private String lastName;
     private String phone;
+    @JsonIgnore
     private int age;
 
     public Contact(Long id, String firstName, String lastName, String phone, int age) {
