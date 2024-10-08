@@ -9,6 +9,5 @@ public class HelloWorld {
         GreetingService helloWorldService = new HelloWorldService(new DefaultNameService("World"));
         System.out.println(helloWorldService.sayHello("Lucio"));
         System.out.println(helloWorldService.sayHello(null));
-
     }
 }

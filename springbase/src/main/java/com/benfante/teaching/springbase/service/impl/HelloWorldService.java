@@ -8,7 +8,7 @@ import com.benfante.teaching.springbase.service.NameService;
 public class HelloWorldService implements GreetingService {
     
     private NameService nameService;
-   
+
     public HelloWorldService(NameService nameService) {
         this.nameService = nameService;
     }
