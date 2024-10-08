@@ -1,24 +1,20 @@
 package com.benfante.teaching.springbase.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import com.benfante.teaching.springbase.service.GreetingService;
 import com.benfante.teaching.springbase.service.NameService;
 
 @Service
-public class HelloWorldService implements GreetingService {
+@Primary
+public class DefaultHelloWorldService implements GreetingService {
     
+    @Autowired
     private NameService nameService;
-
-    public HelloWorldService(NameService nameService) {
-        this.nameService = nameService;
-    }
 
     @Override
     public String sayHello(String name) {
-        if (name != null && !name.isEmpty()) {
-            return "Hello, " + name + "!";
-        }
-        return "Hello, " + nameService.getName() + "!";
+        return "Hello, " + nameService.getName(name) + "!";
     }
-
 }
