@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import com.benfante.javacourse.people_rest.PeopleTestConfig;
 import com.benfante.javacourse.people_rest.model.City;
 import com.benfante.javacourse.people_rest.model.Person;
 import com.benfante.javacourse.people_rest.repository.InMemoryPeopleRepository;
@@ -18,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@SpringBootTest(classes = PeopleControllerTest.class)
+@SpringBootTest(classes = PeopleTestConfig.class)
 @AutoConfigureMockMvc
 public class PeopleControllerTest {
 
