@@ -1,8 +1,6 @@
 package com.benfante.teaching.springboot.firstexample.controllers.rest;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +23,7 @@ public class PersonController {
     }
 
     @GetMapping("/{id}")
-    private Optional<Person> getById(@PathVariable Long id) {
-        return personService.findById(id);
+    private Person getById(@PathVariable Long id) {
+        return personService.findById(id).get();        
     }
 }
