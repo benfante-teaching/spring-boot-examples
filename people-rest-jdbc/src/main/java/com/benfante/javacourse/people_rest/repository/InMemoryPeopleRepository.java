@@ -3,11 +3,9 @@ package com.benfante.javacourse.people_rest.repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.stereotype.Repository;
 import com.benfante.javacourse.people_rest.model.City;
 import com.benfante.javacourse.people_rest.model.Person;
 
-// @Repository
 public class InMemoryPeopleRepository implements PeopleRepository {
 
     private final List<Person> people;

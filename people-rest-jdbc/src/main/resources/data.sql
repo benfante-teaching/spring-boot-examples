@@ -1,12 +1,9 @@
 delete from Person;
 delete from City;
 
-insert into City(city_id, name)
-    values (1, 'Rome');
-insert into City(city_id, name)
-    values (2, 'Milan');
-insert into City(city_id, name)
-    values (3, 'Naples');
+insert into City(name) values ('Rome'); -- city_id should be 1
+insert into City(name) values ('Milan'); -- city_id should be 2
+insert into City(name) values ('Naples'); -- city_id should be 3
 
 insert into Person(first_name, last_name, email, city_id)
   values ('Lucio', 'Benfante', 'lucio.benfante@email.it', 1);

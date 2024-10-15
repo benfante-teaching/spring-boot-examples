@@ -3,10 +3,12 @@ package com.benfante.javacourse.people_rest.service;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.benfante.javacourse.people_rest.model.Person;
 import com.benfante.javacourse.people_rest.repository.PeopleRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class PeopleService {
 
     @Autowired
@@ -20,14 +22,17 @@ public class PeopleService {
         return peopleRepository.findById(id);
     }
 
+    @Transactional(readOnly = false)
     public Person save(Person person) {
         return peopleRepository.save(person);
     }
 
+    @Transactional(readOnly = false)
     public Person update(Person person) {
         return peopleRepository.save(person);
     }
     
+    @Transactional(readOnly = false)
     public void deleteById(Long id) {
         peopleRepository.deleteById(id);
     }
