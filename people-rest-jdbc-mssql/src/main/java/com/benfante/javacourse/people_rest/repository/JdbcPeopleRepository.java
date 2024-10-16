@@ -38,7 +38,7 @@ public class JdbcPeopleRepository implements PeopleRepository {
     public Iterable<Person> findAll() {
         return jdbcTemplate.query("""
                 select p.*, c.*
-                  from person p JOIN city c USING(city_id);
+                  from people.person p JOIN people.city c ON (p.city_id = c.city_id);
                 """,
             personRowMapper);
     }
@@ -47,7 +47,7 @@ public class JdbcPeopleRepository implements PeopleRepository {
     public Optional<Person> findById(Long id) {
         return jdbcTemplate.queryForStream("""
                 select p.*, c.*
-                  from person p JOIN city c USING(city_id)
+                  from people.person p JOIN people.city c ON (p.city_id = c.city_id)
                  where person_id = ?;
                 """,
             personRowMapper, id).findFirst();
@@ -61,7 +61,7 @@ public class JdbcPeopleRepository implements PeopleRepository {
             KeyHolder keyHolder = new GeneratedKeyHolder();
             jdbcTemplate.update(connection -> {
                 PreparedStatement ps = connection.prepareStatement("""
-                    insert into person(first_name, last_name, email, city_id)
+                    insert into people.person(first_name, last_name, email, city_id)
                       values(?, ?, ?, ?);
                     """, new String[] {"person_id"});
                 ps.setString(1, person.firstName());
@@ -74,7 +74,7 @@ public class JdbcPeopleRepository implements PeopleRepository {
         } else {
             Person current = findById(person.id()).get();
             jdbcTemplate.update("""
-                update person
+                update people.person
                   set first_name = ?,
                       last_name = ?,
                       email = ?,
@@ -93,7 +93,7 @@ public class JdbcPeopleRepository implements PeopleRepository {
     @Override
     public void deleteById(Long id) {
         jdbcTemplate.update("""
-            delete from person
+            delete from people.person
              where person_id = ?;
             """, id);
     }
@@ -110,7 +110,7 @@ public class JdbcPeopleRepository implements PeopleRepository {
         Long cityId = city.id();
         if (cityId != null) {
             jdbcTemplate.update("""
-                update city
+                update people.city
                   set name = ?
                   where city_id = ?;                  
                 """,
@@ -119,7 +119,7 @@ public class JdbcPeopleRepository implements PeopleRepository {
             KeyHolder keyHolder = new GeneratedKeyHolder();
             jdbcTemplate.update(connection -> {
                 PreparedStatement ps = connection.prepareStatement("""
-                    insert into city(name)
+                    insert into people.city(name)
                       values(?);
                     """, new String[] {"city_id"});
                 ps.setString(1, city.name());
@@ -133,7 +133,7 @@ public class JdbcPeopleRepository implements PeopleRepository {
     private City findCityById(Long id) {
         return jdbcTemplate.queryForObject("""
             select *
-              from city
+              from people.city
              where city_id = ?;
             """,
             cityRowMapper, id);
