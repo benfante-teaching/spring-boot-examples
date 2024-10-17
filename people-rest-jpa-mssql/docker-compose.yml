@@ -1,0 +1,45 @@
+services:
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    shm_size: 1g
+    restart: always
+    environment:
+      SA_PASSWORD: PeopleRest123
+      ACCEPT_EULA: Y
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql-server-data:/var/opt/mssql
+    networks:
+      - people-rest
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P PeopleRest123 -C -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      retries: 10
+      start_period: 10s
+      timeout: 3s
+  sql-server.configurator:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    volumes:
+      - ./mssql/people-init.sql:/docker-entrypoint-initdb.d/1.sql
+    networks:
+      - people-rest
+    depends_on:
+      sql-server:
+        condition: service_healthy
+    labels:
+      org.springframework.boot.readiness-check.tcp.disable: true
+      org.springframework.boot.ignore: true
+    command: >
+      bash -c '
+      /opt/mssql-tools18/bin/sqlcmd -S sql-server -U sa -P PeopleRest123 -C -d master -i docker-entrypoint-initdb.d/1.sql;
+      echo "All done!";
+      sleep infinity;
+      '      
+volumes:
+  sql-server-data: {
+    driver: local    
+  }
+networks:
+  people-rest:
+    driver: bridge
