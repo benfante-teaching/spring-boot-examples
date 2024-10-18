@@ -1,6 +1,7 @@
 package com.benfante.javacourse.people_rest.model;
 
 import java.util.Objects;
+import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,7 +24,7 @@ public class Person {
     public String firstName;
     @Column(name = "last_name", nullable = false)
     public String lastName;
-    @Column(nullable = false)
+    @Basic(optional = false)
     public String email;
     @ManyToOne(optional = false, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "city_id")
