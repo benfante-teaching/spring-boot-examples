@@ -1,0 +1,6 @@
+{"properties": [{
+  "name": "app.custom.health.status",
+  "type": "java.lang.Boolean",
+  "description": "Set the status of the CustomHealtIndicator",
+  "defaultValue": true
+}]}

@@ -1,6 +1,9 @@
 package com.benfante.javacourse.people_rest.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,11 +22,15 @@ import com.benfante.javacourse.people_rest.service.PeopleService;
 @RequestMapping("/api/v1/people")
 public class PeopleController {
 
+    private static final Logger log = Logger.getLogger(PeopleController.class.getName());
+
     @Autowired
     private PeopleService peopleService;
 
     @GetMapping
     public Iterable<Person> findAll() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        log.info("User " + authentication.getName() + " is calling findAll");
         return peopleService.findAll();
     }
 

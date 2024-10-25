@@ -10,18 +10,20 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import com.benfante.javacourse.people_rest.PeopleTestConfig;
 import com.benfante.javacourse.people_rest.model.City;
 import com.benfante.javacourse.people_rest.model.Person;
 import com.benfante.javacourse.people_rest.repository.PeopleRepository;
-
+import com.benfante.javacourse.people_rest.security.SecurityConfig;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.hamcrest.Matchers.*;
 
 @WebMvcTest(controllers = PeopleController.class)
-@Import(PeopleTestConfig.class)
+@Import({PeopleTestConfig.class, SecurityConfig.class})
+@WithMockUser(username = "user", roles = {"USER"})
 public class PeopleControllerTest {
 
     private static final String BASE_URL = "/api/v1/people";
