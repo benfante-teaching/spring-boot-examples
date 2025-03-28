@@ -10,6 +10,7 @@ import com.benfante.teaching.springbase.service.GreetingService;
 import com.benfante.teaching.springbase.service.NameService;
 import com.benfante.teaching.springbase.service.impl.DefaultNameService;
 import com.benfante.teaching.springbase.service.impl.HelloWorldService;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 @ComponentScan("com.benfante.teaching.springbase")
@@ -17,19 +18,27 @@ public class App {
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(App.class);
 
-        GreetingService helloWorldServic = context.getBean(HelloWorldService.class);
+        GreetingService greetingService = context.getBean(GreetingService.class);
 
-        System.out.println(helloWorldServic.sayHello("Lucio"));
-        System.out.println(helloWorldServic.sayHello(null));
+        System.out.println(greetingService.sayHello("Lucio"));
+        System.out.println(greetingService.sayHello(null));
 
         ((GenericApplicationContext) context).close();
     }
-
-
-    // Uncomment this method to use a custom name service
 
     // @Bean
     // public NameService defaultNameService() {
     //     return new DefaultNameService("Pippo");
     // }
+
+    // Uncomment this method to use a custom name service
+
+    @Bean    // @Bean
+    // public NameService defaultNameService() {
+    //     return new DefaultNameService("Pippo");
+    // }
+
+    public NameService defaultNameService() {
+         return new DefaultNameService("Pippo");
+    }
 }
