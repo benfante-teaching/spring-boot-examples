@@ -9,8 +9,6 @@ import org.springframework.context.support.GenericApplicationContext;
 import com.benfante.teaching.springbase.service.GreetingService;
 import com.benfante.teaching.springbase.service.NameService;
 import com.benfante.teaching.springbase.service.impl.DefaultNameService;
-import com.benfante.teaching.springbase.service.impl.HelloWorldService;
-import org.springframework.context.annotation.Primary;
 
 @Configuration
 @ComponentScan("com.benfante.teaching.springbase")
