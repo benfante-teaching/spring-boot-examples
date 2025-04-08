@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  layout:decorate="~{layout(title='TODO Web Application')}"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head>
+    <title>TODO Web Application</title>
+  </head>
+  <body>
+    <div layout:fragment="content">
+      <h2>Welcome to the TODO Web Application</h2>
+      <p>This is a simple web application to manage your TODO tasks.</p>
+      <h3>Features:</h3>
+      <ul>
+        <li>View all TODO tasks</li>
+        <li>Delete TODO tasks</li>
+      </ul>
+      <a th:href="@{/todos}">View TODO Tasks</a>
+    </div>
+  </body>
+</html>
