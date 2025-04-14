@@ -5,7 +5,7 @@ import java.util.UUID;
 public record Todo(UUID id, String title, String description, boolean completed) {
     public Todo {
         if (id == null) {
-            throw new IllegalArgumentException("ID cannot be null");
+            id = UUID.randomUUID();
         }
         if (title == null || title.isBlank()) {
             throw new IllegalArgumentException("Title cannot be null or empty");
@@ -13,11 +13,11 @@ public record Todo(UUID id, String title, String description, boolean completed)
     }
 
     public Todo(String title) {
-        this(UUID.randomUUID(), title, null, false);
+        this(null, title, null, false);
     }
 
     public Todo(String title, String description) {
-        this(UUID.randomUUID(), title, description, false);
+        this(null, title, description, false);
     }
 
     @Override
