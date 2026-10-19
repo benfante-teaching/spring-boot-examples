@@ -21,4 +21,9 @@ public class DefaultNameService implements NameService {
         return defaultName;
     }
 
+    @Override
+    public String getName(String id) {
+        return getName();
+    }
+
 }

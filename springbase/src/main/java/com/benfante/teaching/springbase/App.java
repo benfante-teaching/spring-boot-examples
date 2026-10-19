@@ -1,15 +1,19 @@
 package com.benfante.teaching.springbase;
 
+import java.io.IOException;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.support.GenericApplicationContext;
 import com.benfante.teaching.springbase.service.GreetingService;
 import com.benfante.teaching.springbase.service.NameService;
 import com.benfante.teaching.springbase.service.impl.DefaultNameService;
 import com.benfante.teaching.springbase.service.impl.HelloWorldService;
+import com.benfante.teaching.springbase.service.impl.PropertyNameService;
 
 @Configuration
 @ComponentScan("com.benfante.teaching.springbase")
@@ -28,8 +32,9 @@ public class App {
 
     // Uncomment this method to use a custom name service
 
-    // @Bean
-    // public NameService defaultNameService() {
-    //     return new DefaultNameService("Pippo");
-    // }
+    @Bean
+    @Primary 
+    public NameService nameService() throws IOException {
+        return new PropertyNameService();
+    }
 }

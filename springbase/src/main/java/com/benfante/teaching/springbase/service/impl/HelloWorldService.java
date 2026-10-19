@@ -16,7 +16,7 @@ public class HelloWorldService implements GreetingService {
     @Override
     public String sayHello(String name) {
         if (name != null && !name.isEmpty()) {
-            return "Hello " + name + "!";
+            return "Hello " + nameService.getName(name) + "!";
         }
         return "Hello " + nameService.getName() + "!";
     }
