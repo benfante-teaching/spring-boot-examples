@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Person form</title>
+</head>
+<body>
+    <h1>Person Form</h1>
+    <form action="#" th:action="@{/person/update}" th:method="post" th:object="${person}">
+        <label for="id">ID:</label>
+        <input type="text" id="id" th:field="*{id}" readonly><br><br>
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <div th:if="${error}" style="color: red;">
+        <p th:text="${error}"></p>
+    </div>
+    <div th:if="${message}" style="color: green;">
+        <p th:text="${message}"></p>
+    </div>
+</body>
+</html>
