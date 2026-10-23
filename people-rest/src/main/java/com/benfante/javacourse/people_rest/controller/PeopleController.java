@@ -1,6 +1,7 @@
 package com.benfante.javacourse.people_rest.controller;
 
 import org.springframework.http.ResponseEntity;
+import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,8 +31,8 @@ public class PeopleController {
     @GetMapping("/{id}")
     public ResponseEntity<Person> findById(@PathVariable Long id) {
         return peopleService.findById(id)
-            .map(person -> ResponseEntity.ok(person))
-            .orElse(ResponseEntity.notFound().build());
+                .map(person -> ResponseEntity.ok(person))
+                .orElseThrow(() -> new NoSuchElementException("Person not found with id " + id));
     }
 
     @PostMapping
@@ -43,10 +44,11 @@ public class PeopleController {
     @PatchMapping("/{id}")
     public ResponseEntity<Person> update(@PathVariable Long id, @RequestBody Person person) {
         if (person.id() != null && !id.equals(person.id())) {
-            return ResponseEntity.badRequest().build();
+            throw new IllegalArgumentException("ID in path and request body must match");
+        } else {
+            return ResponseEntity.ok().body(peopleService.update(
+                    new Person(id, person.firstName(), person.lastName(), person.email(), person.city())));
         }
-        return ResponseEntity.ok().body(peopleService.update(
-            new Person(id, person.firstName(), person.lastName(), person.email(), person.city())));
     }
 
     @DeleteMapping("/{id}")
@@ -54,5 +56,5 @@ public class PeopleController {
         peopleService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-    
+
 }
