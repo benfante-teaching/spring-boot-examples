@@ -1,0 +1,27 @@
+services:
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 18080:8080
+    networks:
+      - people-local-network
+  postgres_people:
+    image: postgres
+    ports:
+      - 15432:5432
+    shm_size: 128mb
+    volumes:
+      - postgres_people_local_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: people
+      POSTGRES_USER: people
+      POSTGRES_PASSWORD: people
+    networks:
+      - people-local-network
+volumes:
+  postgres_people_local_data:
+    driver: local
+networks:
+  people-local-network:
+    driver: bridge
