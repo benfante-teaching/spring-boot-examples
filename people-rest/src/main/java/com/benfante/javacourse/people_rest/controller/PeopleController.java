@@ -2,7 +2,6 @@ package com.benfante.javacourse.people_rest.controller;
 
 import org.springframework.http.ResponseEntity;
 import java.util.NoSuchElementException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +19,11 @@ import com.benfante.javacourse.people_rest.service.PeopleService;
 @RequestMapping("/api/v1/people")
 public class PeopleController {
 
-    @Autowired
-    private PeopleService peopleService;
+    private final PeopleService peopleService;
+
+    PeopleController(PeopleService peopleService) {
+        this.peopleService = peopleService;
+    }
 
     @GetMapping
     public Iterable<Person> findAll() {
