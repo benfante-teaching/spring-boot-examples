@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.benfante.javacourse</groupId>
-	<artifactId>people-rest</artifactId>
+	<artifactId>people-rest-jdbc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>people-rest</name>
 	<description>Exercise about developing a first REST Service</description>
